@@ -110,4 +110,22 @@ const pendingTab=document.querySelector('.evidence-tab[data-evidence="pending"]'
 const notices=document.querySelectorAll('.project .notice');if(notices[0])notices[0].textContent='La propuesta municipal contempla 30 plazas; la ubicación y las condiciones se tramitarán con el Ayuntamiento.';if(notices[1])notices[1].textContent='La referencia privada contempla 50 plazas; la parcela y el anteproyecto deberán ser compatibles con la normativa aplicable.';
 </script><script>
 window.addEventListener('load',()=>setTimeout(()=>{if(typeof map!=='undefined'&&map){map.invalidateSize();map.setView([29.118,-13.56],12);showPoint(1)}},300));
-</script></body></html>
+</script><script>
+/* Vista satélite fija: Google satellite, encuadre municipal y coordenadas verificadas. */
+const mapHost=document.getElementById('camperMap');
+if(mapHost){
+  if(typeof map!=='undefined'&&map){map.remove();map=null}
+  mapHost.classList.add('satellite-static');
+  mapHost.innerHTML='<div class="satellite-canvas" aria-label="Vista satélite de Google Maps del municipio de Teguise"><div class="satellite-tiles"></div><div class="satellite-markers"></div><span class="satellite-credit">Google Maps · vista satélite · Teguise</span></div>';
+  const z=12,n=2**z,centerLat=29.08,centerLng=-13.55,tile=256;
+  const world=(lat,lng)=>({x:(lng+180)/360*n*tile,y:(1-Math.asinh(Math.tan(lat*Math.PI/180))/Math.PI)/2*n*tile});
+  const center=world(centerLat,centerLng),cols=5,rows=4,x0=Math.floor(center.x/tile)-2,y0=Math.floor(center.y/tile)-2,canvasW=cols*tile,canvasH=rows*tile;
+  const canvas=mapHost.querySelector('.satellite-canvas');canvas.style.aspectRatio=canvasW+'/'+canvasH;
+  const tiles=mapHost.querySelector('.satellite-tiles');
+  for(let row=0;row<rows;row++)for(let col=0;col<cols;col++){const img=document.createElement('img');img.alt='';img.width=tile;img.height=tile;img.loading='eager';img.src=`https://mt1.google.com/vt/lyrs=s&x=${x0+col}&y=${y0+row}&z=${z}`;tiles.appendChild(img)}
+  const marks=mapHost.querySelector('.satellite-markers');
+  points.forEach((p,i)=>{const q=world(p.lat,p.lng),dot=document.createElement('button');dot.type='button';dot.className='satellite-marker '+p.type;dot.style.left=((q.x-x0*tile)/canvasW*100)+'%';dot.style.top=((q.y-y0*tile)/canvasH*100)+'%';dot.title=p.title;dot.setAttribute('aria-label',p.title);dot.addEventListener('click',()=>showPoint(i));marks.appendChild(dot)});
+}
+</script><style>
+.satellite-static{height:auto!important;background:#142c31;border-radius:0 0 18px 18px;overflow:hidden}.satellite-canvas{position:relative;width:100%;overflow:hidden}.satellite-tiles{position:absolute;inset:0;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(4,1fr)}.satellite-tiles img{width:100%;height:100%;object-fit:cover;display:block}.satellite-markers{position:absolute;inset:0}.satellite-marker{position:absolute;width:20px;height:20px;margin:-10px 0 0 -10px;border:3px solid #fff;border-radius:50%;background:#bc5b44;box-shadow:0 2px 8px rgba(0,0,0,.45);cursor:pointer}.satellite-marker.tourism{background:#f1b84b}.satellite-marker.study{background:#536b95}.satellite-marker.pressure{background:#bc5b44}.satellite-credit{position:absolute;right:10px;bottom:8px;padding:4px 7px;border-radius:5px;background:rgba(255,255,255,.86);color:#1b312d;font-size:11px;font-weight:700}.satellite-static+.legend{background:#fff}
+</style></body></html>
