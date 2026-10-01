@@ -69,11 +69,11 @@ setText('#overview .kicker','Lectura ejecutiva');
 setText('#overview h2','Famara necesita datos antes de fijar plazas');
 setText('#overview .section-head p','El Ayuntamiento tiene que validar puntos, ocupación, servicios, incidencias y suelo. Las cifras de capacidad son escenarios de trabajo, no compromisos.');
 const nums=document.querySelectorAll('#overview .stat .num');
-if(nums[0])nums[0].textContent='Por definir'; if(nums[1])nums[1].textContent='Por definir';
+if(nums[0])nums[0].textContent='30'; if(nums[1])nums[1].textContent='50';
 const labels=document.querySelectorAll('#overview .stat small');
-if(labels[0])labels[0].textContent='plazas tras diagnóstico y suelo compatible'; if(labels[1])labels[1].textContent='capacidad tras anteproyecto privado';
-if(nums[2])nums[2].textContent='Varios'; if(labels[2])labels[2].textContent='hechos, actuaciones y denuncias enlazadas';
-if(nums[3])nums[3].textContent='Contacto'; if(labels[3])labels[3].textContent='oficinatecnica@teguise.es';
+if(labels[0])labels[0].textContent='plazas públicas propuestas'; if(labels[1])labels[1].textContent='plazas privadas orientativas';
+if(nums[2])nums[2].textContent='9'; if(labels[2])labels[2].textContent='fichas con fuentes enlazadas';
+if(nums[3])nums[3].textContent='20'; if(labels[3])labels[3].textContent='autocaravanas denunciadas en Las Cucharas';
 const overviewKickers=document.querySelectorAll('#overview .stat .kicker'); if(overviewKickers[2])overviewKickers[2].textContent='Diagnóstico documentado'; if(overviewKickers[3])overviewKickers[3].textContent='Oficina Técnica';
 document.querySelectorAll('#overview .stat .kicker').forEach(el=>{if(el.textContent.includes('OCUPACIÓN TURÍSTICA'))el.textContent='Oficina Técnica'});
 const evidenceGrid=document.querySelector('#evidence .evidence-grid');
@@ -89,9 +89,9 @@ if(evidenceGrid){
 const camperStat=document.querySelector('#overview .stat.feature .kicker');
 if(camperStat)camperStat.textContent='Diagnóstico documentado';
 const camperStatNum=document.querySelector('#overview .stat.feature .num');
-if(camperStatNum)camperStatNum.textContent='Varios';
+if(camperStatNum)camperStatNum.textContent='9';
 const camperStatLabel=document.querySelector('#overview .stat.feature small');
-if(camperStatLabel)camperStatLabel.textContent='hechos, actuaciones y denuncias enlazadas';
+if(camperStatLabel)camperStatLabel.textContent='fichas con fuentes enlazadas';
 document.querySelectorAll('.method').forEach(el=>{el.textContent='El Ayuntamiento debe incorporar un registro mensual de ocupación camper. El site no atribuye una cifra hasta que exista una fuente municipal verificable.'});
 </script><script>
 // Corrección editorial Teguise–Famara: cifras visibles documentadas y contacto fuera del bloque ejecutivo.
