@@ -109,5 +109,5 @@ const evidenceIntro=document.querySelector('#evidence .section-head p');if(evide
 const pendingTab=document.querySelector('.evidence-tab[data-evidence="pending"]');if(pendingTab)pendingTab.textContent='Validación municipal';
 const notices=document.querySelectorAll('.project .notice');if(notices[0])notices[0].textContent='La propuesta municipal contempla 30 plazas; la ubicación y las condiciones se tramitarán con el Ayuntamiento.';if(notices[1])notices[1].textContent='La referencia privada contempla 50 plazas; la parcela y el anteproyecto deberán ser compatibles con la normativa aplicable.';
 </script><script>
-window.addEventListener('load',()=>setTimeout(()=>{if(typeof map!=='undefined'&&map){map.invalidateSize();map.setView([29.118,-13.56],11)}},300));
+window.addEventListener('load',()=>setTimeout(()=>{if(typeof map!=='undefined'&&map){map.invalidateSize();map.setView([29.118,-13.56],12);showPoint(1)}},300));
 </script></body></html>
